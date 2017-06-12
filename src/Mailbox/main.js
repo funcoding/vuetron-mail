@@ -10,28 +10,23 @@ Vue.use(VueRouter);
 
 var routes = require('./routes');
 
-const router = new VueRouter({
-    routes: [
-        routes.navigateFolderRoute
-    ]
-});
-
+let route_paths =  [
+    routes.navigateFolderRoute,
+    routes.navigateOpenMail
+];
 
 if(helper.getVueInstance() === null){
+    const router = new VueRouter({
+        routes: route_paths
+    });
 
     helper.updateVueInstance(new Vue({
-        router
-    })).$mount('#app');
+        router,
+        el: '#app'
+    }));
+
 }else{
-
-    var app = helper.getVueInstance();
-
-    app.$router.addRoutes([
-        routes.navigateFolderRoute,
-        routes.navigateOpenMail
-    ]);
-
+    let app = helper.getVueInstance();
+    app.$router.addRoutes(route_paths);
+    helper.updateVueInstance(app);
 }
-
-//helper.syncImap('INBOX');
-//helper.fetchAllMailFolders();

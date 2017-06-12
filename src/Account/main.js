@@ -1,6 +1,6 @@
-var Vue = require('../../node_modules/vue/dist/vue.min');
+let Vue = require('../../node_modules/vue/dist/vue.min');
 
-var VueRouter = require('vue-router');
+let VueRouter = require('vue-router');
 
 const helper = require('../helper');
 
@@ -12,16 +12,18 @@ require('../global-components/info');
 //Require local components
 const components = require('./components');
 
-var routes = require('./routes');
+let routes = require('./routes');
 
-const router = new VueRouter({
-    routes: [
+let route_paths = [
         routes.addMailAccountRoute,
         routes.editMailAccountRoute
-    ]
-});
+];
 
 if(helper.getVueInstance() === null){
+    const router = new VueRouter({
+        routes: route_paths
+    });
+
     helper.updateVueInstance(new Vue({
         el: '#app',
         router,
@@ -30,24 +32,10 @@ if(helper.getVueInstance() === null){
         },
     }));
 
-    //helper.getVueInstance().$mount('#app');
 }else{
-
+    Vue.component('list-mail-accounts', components.listMailAccounts);
+    let app = helper.getVueInstance();
+    app.$router.addRoutes(route_paths);
+    app.$forceUpdate(); //Need to force update since component is not loading
+    helper.updateVueInstance(app);
 }
-
-/*const app = new Vue({
-    router,
-    components: {
-        'list-mail-accounts': components.listMailAccounts
-    }
-}).$mount('#app');*/
-
-/*var v = helper.vue();
-var  p = v.extend({
-    router: router,
-    components: {
-        'list-mail-accounts': components.listMailAccounts
-    }
-});
-
-new p().$mount('#app');*/
