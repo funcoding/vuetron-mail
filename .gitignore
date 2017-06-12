@@ -1,0 +1,10 @@
+node_modules/
+.idea/
+dist/
+build/
+path/
+database
+webpack.config.js
+bundle.js
+gulpfile.js
+.idea

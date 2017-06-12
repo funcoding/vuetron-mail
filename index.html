@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vuetron mail client</title>
+    <link rel="stylesheet" href = "public/css/photon.min.css"/>
+</head>
+<body>
+<div class="window" id = "app">
+    <header class="toolbar toolbar-header">
+        <div class="toolbar-actions">
+            <div class="btn-group pull-right">
+                <router-link to="/account/add">
+                    <button class="btn btn-large btn-default" id="create-new-account">
+                        <span class="icon icon-user-add"></span>
+                        Add account
+                    </button>
+                </router-link>
+            </div>
+        </div>
+    </header>
+
+    <div class="window-content">
+        <div class="pane-group">
+            <div class="pane-sm sidebar">
+                <list-mail-accounts></list-mail-accounts>
+            </div>
+            <div class="pane">
+                <router-view></router-view>
+            </div>
+        </div>
+    </div>
+    <footer class="toolbar toolbar-footer">
+    </footer>
+</div>
+<script>
+    require('./src/main');
+</script>
+</body>
+</html>
+
