@@ -7,7 +7,8 @@
         <table class="table-striped">
             <thead>
             <tr>
-                <th>From</th>
+                <th v-show='$route.params.folder !== "Sent"'>From</th>
+                <th v-show='$route.params.folder === "Sent"'>To</th>
                 <th>Subject</th>
                 <th>Date</th>
                 <th></th>
@@ -15,7 +16,8 @@
             </thead>
             <tbody>
             <tr v-for="content in contents">
-                <td>{{ JSON.parse(content.headers).from[0] }}</td>
+                <td v-show='$route.params.folder !== "Sent"'>{{ JSON.parse(content.headers).from[0] }}</td>
+                <td v-show='$route.params.folder === "Sent"'>{{ JSON.parse(content.headers).to[0] }}</td>
                 <td>{{ JSON.parse(content.headers).subject[0] }}</td>
                 <td>{{ JSON.parse(content.headers).date[0] }}</td>
                 <td>
