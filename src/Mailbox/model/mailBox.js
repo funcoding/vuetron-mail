@@ -17,7 +17,7 @@ module.exports = {
             .where('mail_account_id', mailAccount)
             .where('folder', folder)
             .whereNot('headers', '=', '{}') //In rare case headers is stored as {} . Have to dig into.
-            .orderBy('sequence_number', 'desc')
+            .orderByRaw('datetime(updated_at) desc')
             .then(function(rows) {
                 /*let temp = [];
                 for(let i=0;i<rows.length;i++){
@@ -39,15 +39,14 @@ module.exports = {
     },
 
     store: function(vueInstance, data){
-        var i = 0;
-        var toInsert = [];
-        var index = 0;
+        let i = 0;
         while (i < data.length){
+            let index = i;
             knex.table(table)
                 .update('body', data[i].body)
                 .where('sequence_number', data[i].sequence_number)
                 .then(function(updated){
-                    if(updated !== 1){
+                    if(updated === 0){
                         knex.insert({
                             sequence_number: data[index].sequence_number,
                             headers: data[index].headers,
@@ -59,11 +58,11 @@ module.exports = {
                         }).catch(function (error) {
                             console.error(error.message);
                         });
-                        index++;
                     }
                 }).catch(function (error) {
                     console.error(error.message);
             });
+
             i++;
         }
     },
