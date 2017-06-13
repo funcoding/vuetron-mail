@@ -56,6 +56,10 @@ var app = new Vue({
                 html: this.tinyMce.activeEditor.getContent() // html body
             };
 
+            if(this.cc !== ''){
+                mailOptions.cc = this.cc;
+            }
+
             //Include the attachments
             if(this.attachments.length > 0)
             {
