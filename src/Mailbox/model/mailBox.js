@@ -16,6 +16,7 @@ module.exports = {
             .table(table)
             .where('mail_account_id', mailAccount)
             .where('folder', folder)
+            .whereNot('headers', '=', '{}') //In rare case headers is stored as {} . Have to dig into.
             .orderBy('sequence_number', 'desc')
             .then(function(rows) {
                 /*let temp = [];
@@ -60,14 +61,11 @@ module.exports = {
                         });
                         index++;
                     }
-                })
-                .catch(function (error) {
-                console.error(error.message);
+                }).catch(function (error) {
+                    console.error(error.message);
             });
             i++;
         }
-        vueInstance.disabled = false;
-        vueInstance.sync = 'sync';
     },
 
     find: function (vueInstance, account, sequenceNumber) {
