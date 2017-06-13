@@ -92,7 +92,9 @@ module.exports = {
      */
     findAndSync: function(vueInstance, id, mailFolder){
         let rows= '';
-        knex.select().table(table).where('id', '=', id).first()
+        knex.table(table)
+            .where('id', '=', id)
+            .first()
             .then(function(_rows) {
                 rows = _rows;
                 knex.select('sequence_number', 'created_at')
@@ -100,19 +102,20 @@ module.exports = {
                     .where('mail_account_id', _rows.id)
                     .where('folder', mailFolder)
                     .orderBy('sequence_number', 'desc')
-                    .first();
-        })
-        .then(function(result){
-            if(typeof result === 'undefined'){
-                //Assume new mail account has been created
-                helper.syncImap(vueInstance, rows, id, mailFolder, null, rows.sync_from);
-            }else{
-                helper.syncImap(vueInstance, rows, id, mailFolder, null, dateFormat(result.created_at, "mmmm d, yyyy"));
-            }
-        })
-        .catch(function(error) {
-            console.error(error);
-        });
+                    .first().then(function (result) {
+                        if (typeof result === 'undefined') {
+                            //Assume new mail account has been created
+                            helper.syncImap(vueInstance, rows, id, mailFolder, null, rows.sync_from);
+                        } else {
+                            helper.syncImap(vueInstance, rows, id, mailFolder, null, dateFormat(result.created_at, "mmmm d, yyyy"));
+                        }
+                    }
+                ).catch(function(error) {
+                    console.error(error);
+                });
+            }).catch(function(error) {
+                console.error(error);
+            });
     },
 
     find: function (vueInstance, id) {

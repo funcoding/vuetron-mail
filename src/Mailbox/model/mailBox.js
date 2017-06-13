@@ -55,20 +55,19 @@ module.exports = {
                             mail_account_id: data[index].mail_account_id
                         }).into(table).then(function (status) {
                             console.log(status);
-                            vueInstance.contents = data;
                         }).catch(function (error) {
                             console.error(error.message);
                         });
                         index++;
                     }
-                    vueInstance.disabled = false;
-                    vueInstance.sync = 'sync';
                 })
                 .catch(function (error) {
                 console.error(error.message);
             });
             i++;
         }
+        vueInstance.disabled = false;
+        vueInstance.sync = 'sync';
     },
 
     find: function (vueInstance, account, sequenceNumber) {

@@ -158,6 +158,8 @@ module.exports = {
                 }).then(function () {
                     console.log(toStore);
                     mailBox.store(vueInstance, toStore);
+                }).then(function () {
+                    mailBox.fetchFolder(vueInstance, mailAccountId, mailFolder);
                 }).catch(function (error) {
                     console.log(error.message);
                 });
@@ -195,6 +197,8 @@ module.exports = {
                 }).then(function () {
                     console.log(toStore);
                     mailBox.store(vueInstance, toStore);
+                }).then(function () {
+                    mailBox.fetchFolder(vueInstance, mailAccountId, mailFolder);
                 }).catch(function (error) {
                     console.log(error.message);
                 });
@@ -232,6 +236,8 @@ module.exports = {
             }).then(function () {
                 console.log(toStore);
                 mailBox.store(vueInstance, toStore);
+            }).then(function () {
+                mailBox.fetchFolder(vueInstance, mailAccountId, mailFolder);
             }).catch(function (error) {
                 console.log(error.message);
             });
