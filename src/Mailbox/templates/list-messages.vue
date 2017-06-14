@@ -1,5 +1,9 @@
 <div>
     <div>
+        <div>
+            <info v-show="message.length > 0" v-bind:message="message">{{ message }}</info>
+        </div>
+
         <button v-bind:disabled="disabled" v-on:click="syncFolder()" class="btn btn-primary btn-large pull-right" style="margin:10px;">
             <span class="icon icon-arrows-ccw"></span>&nbsp;&nbsp{{ sync }}
         </button>

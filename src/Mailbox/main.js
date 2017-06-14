@@ -6,6 +6,8 @@ const helper = require('../helper');
 
 const components = require('./components');
 
+require('../global-components/info');
+
 Vue.use(VueRouter);
 
 var routes = require('./routes');

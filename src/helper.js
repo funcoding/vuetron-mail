@@ -160,10 +160,15 @@ module.exports = {
                     mailBox.store(vueInstance, toStore);
                 }).then(function () {
                     mailBox.fetchFolder(vueInstance, mailAccountId, mailFolder);
+                }).then(function (){
                     vueInstance.disabled = false;
                     vueInstance.sync = 'sync';
+                    vueInstance.message = 'Sync complete.';
                 }).catch(function (error) {
                     console.log(error.message);
+                    vueInstance.disabled = false;
+                    vueInstance.sync = 'sync';
+                    vueInstance.message = error.message;
                 });
 
             }else{
@@ -201,11 +206,17 @@ module.exports = {
                     mailBox.store(vueInstance, toStore);
                 }).then(function () {
                     mailBox.fetchFolder(vueInstance, mailAccountId, mailFolder);
+                }).then(function (){
                     vueInstance.disabled = false;
                     vueInstance.sync = 'sync';
+                    vueInstance.message = 'Sync complete.';
                 }).catch(function (error) {
                     console.log(error.message);
+                    vueInstance.disabled = false;
+                    vueInstance.sync = 'sync';
+                    vueInstance.message = error.message;
                 });
+
             }
         }else{
 
@@ -242,10 +253,17 @@ module.exports = {
                 mailBox.store(vueInstance, toStore);
             }).then(function () {
                 mailBox.fetchFolder(vueInstance, mailAccountId, mailFolder);
+            }).then(function (){
                 vueInstance.disabled = false;
                 vueInstance.sync = 'sync';
+                vueInstance.message = 'Sync complete.';
             }).catch(function (error) {
                 console.log(error.message);
+                vueInstance.message = error.message;
+                vueInstance.disabled = false;
+                vueInstance.sync = 'sync';
+                //vueInstance.disabled = false;
+                //vueInstance.sync = 'sync';
             });
         }
     }
