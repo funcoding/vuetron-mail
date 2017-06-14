@@ -19,7 +19,7 @@
                 </div>
                 <nav class="nav-group pull-left">
                     <btn class="nav-group-item" v-on:click="compose(account.id)"><span class="icon icon-mail"></span>Compose</btn>
-                    <router-link v-bind:class = "$route.params.folder === 'INBOX' ? 'nav-group-item active' : 'nav-group-item'" v-bind:to="{ name: 'folder-navigation', params: { id: account.id, folder: 'INBOX' }}">
+                    <router-link v-bind:class = "$route.params.folder === 'INBOX' && account.id === $route.params.id ? 'nav-group-item active' : 'nav-group-item'" v-bind:to="{ name: 'folder-navigation', params: { id: account.id, folder: 'INBOX' }}">
                         <span class="icon icon-mail"></span>
                         Inbox
                     </router-link>
@@ -29,12 +29,12 @@
                         Outbox
                     </router-link>-->
 
-                    <router-link v-bind:class = "$route.params.folder === 'Sent' ? 'nav-group-item active' : 'nav-group-item'" v-bind:to="{ name: 'folder-navigation', params: { id: account.id, folder: 'Sent' }}">
+                    <router-link v-bind:class = "$route.params.folder === 'Sent' && account.id === $route.params.id ? 'nav-group-item active' : 'nav-group-item'" v-bind:to="{ name: 'folder-navigation', params: { id: account.id, folder: 'Sent' }}">
                         <span class="icon icon-paper-plane" ></span>
                         Sent
                     </router-link>
 
-                    <router-link v-bind:class = "$route.params.folder === 'Spam' ? 'nav-group-item active' : 'nav-group-item'"  v-bind:to="{ name: 'folder-navigation', params: { id: account.id, folder: 'Spam' }}">
+                    <router-link v-bind:class = "$route.params.folder === 'Spam' && account.id === $route.params.id ? 'nav-group-item active' : 'nav-group-item'"  v-bind:to="{ name: 'folder-navigation', params: { id: account.id, folder: 'Spam' }}">
                         <span class="icon icon-alert"></span>
                         Spam
                     </router-link>
