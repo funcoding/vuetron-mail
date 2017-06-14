@@ -13,12 +13,14 @@ module.exports = {
             return {
                 contents: '',
                 sync: 'sync',
-                disabled: false
+                disabled: false,
+                message: ''
             }
         },
 
         methods:{
             syncFolder: function(){
+                this.message = '';
                 let vue = this;
                 vue.disabled = true;
                 vue.sync = 'syncing....';
@@ -30,6 +32,7 @@ module.exports = {
             '$route' (to, from) {
                 // react to route changes...
                 mailbox.fetchFolder(this, this.$route.params.id, this.$route.params.folder);
+                this.message = '';
             }
         },
 
