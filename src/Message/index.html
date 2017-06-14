@@ -13,17 +13,16 @@
 <body>
     <div id = "app">
         <header class="toolbar toolbar-header">
-            <h1 class="title">Header with actions</h1>
-
             <div class="toolbar-actions">
                 <div class="btn-group">
-                    <button class="btn btn-large btn-default" v-on:click="send()">
+                    <button class="btn btn-large btn-default pull-right" v-on:click="send()">
                         <span class="icon icon-paper-plane"></span>
                         &nbsp;Send
                     </button>
                 </div>
             </div>
         </header>
+        <info v-show="message.length > 0" v-bind:message="message">{{ message }}</info>
         <div class = "form-div">
             <div class="form-group">
                 <label>To</label>
@@ -49,11 +48,12 @@
             </div>
             <div class="form-group">
                 <label>Message</label>
-                <textarea id = "content" v-model="content" class="form-control" rows="15">q</textarea>
+                <textarea id = "content" v-model="content" class="form-control" rows="15"></textarea>
             </div>
         </div>
     </div>
 </body>
+<footer class="toolbar toolbar-footer">ola</footer>
  <!-- Include the scripts -->
 <script src="../../public/js/tinymce/tinymce.min.js"></script>
 <script src="index.js"></script>

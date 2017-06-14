@@ -4,12 +4,14 @@ window.$ = window.jQuery = require('jquery');
 const helper = require('../helper');
 const remote = require('electron').remote;
 let currentWindow = remote.getCurrentWindow();
+require('../global-components/info');
 
 const nodemailer = require('nodemailer');
 
 var app = new Vue({
     el: '#app',
     data: {
+        message: '',
         type: '',
         account: '',
         sequenceNumber: '',
@@ -48,6 +50,7 @@ var app = new Vue({
         send: function () {
             //Trigger the maild
             let knex = helper.dbConn();
+            let vue = this;
 
             let mailOptions = {
                 to: this.to, // list of receivers
@@ -88,10 +91,12 @@ var app = new Vue({
                         }
                     });
 
+                    vue.message = "Sending message. Will close automatically if sent.";
                     // send mail with defined transport object
                     transporter.sendMail(mailOptions, (error, info) => {
                         if (error) {
                             console.log(error);
+                            vue.message = error.message;
                         }else{
                             console.log('Message %s sent: %s', info.messageId, info.response);
                             currentWindow.close();
