@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "postinstall": "node src/create-tables.js"
+    "postinstall": "./node_modules/.bin/electron-rebuild && node src/create-tables.js"
   },
   "keywords": [
     "mail-client"
@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "dateformat": "^2.0.0",
+    "electron-context-menu": "^0.9.1",
     "electron-rebuild": "^1.5.11",
     "html-to-text": "^3.3.0",
     "imap": "^0.8.19",
@@ -41,6 +42,7 @@
     "jquery": "^3.2.1",
     "mailparser": "^2.0.5",
     "nodemailer": "^4.0.1",
+    "promise": "^7.1.1",
     "sqlite3": "^3.1.8",
     "util": "^0.10.3",
     "vue": "^2.3.3"
