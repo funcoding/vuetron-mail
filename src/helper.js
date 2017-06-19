@@ -1,13 +1,11 @@
 let db;
 
+let Promise = require('promise');
 var path = require('path');
-
 var globalVueInstance = null;
-
 var imap = require('imap-simple');
 var Imap = require('imap');
 let Vue = require('../node_modules/vue/dist/vue.min');
-
 var inspect = require('util').inspect;
 var fs = require('fs'), fileStream;
 
@@ -158,8 +156,6 @@ module.exports = {
                 }).then(function () {
                     console.log(toStore);
                     mailBox.store(vueInstance, toStore);
-                }).then(function () {
-                    mailBox.fetchFolder(vueInstance, mailAccountId, mailFolder);
                 }).then(function (){
                     vueInstance.disabled = false;
                     vueInstance.sync = 'sync';
@@ -202,10 +198,7 @@ module.exports = {
                         });
                     });
                 }).then(function () {
-                    console.log(toStore);
                     mailBox.store(vueInstance, toStore);
-                }).then(function () {
-                    mailBox.fetchFolder(vueInstance, mailAccountId, mailFolder);
                 }).then(function (){
                     vueInstance.disabled = false;
                     vueInstance.sync = 'sync';
@@ -251,8 +244,6 @@ module.exports = {
             }).then(function () {
                 console.log(toStore);
                 mailBox.store(vueInstance, toStore);
-            }).then(function () {
-                mailBox.fetchFolder(vueInstance, mailAccountId, mailFolder);
             }).then(function (){
                 vueInstance.disabled = false;
                 vueInstance.sync = 'sync';

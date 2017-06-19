@@ -40,6 +40,7 @@ module.exports = {
 
     store: function(vueInstance, data){
         let i = 0;
+        let instance = this;
         while (i < data.length){
             let index = i;
             knex.table(table)
@@ -55,10 +56,13 @@ module.exports = {
                             mail_account_id: data[index].mail_account_id
                         }).into(table).then(function (status) {
                             console.log(status);
+                            instance.fetchFolder(vueInstance, data[index].mail_account_id, data[index].folder);
                         }).catch(function (error) {
                             console.error(error.message);
                         });
                     }
+
+                    instance.fetchFolder(vueInstance, data[index].mail_account_id, data[index].folder)
                 }).catch(function (error) {
                     console.error(error.message);
             });
