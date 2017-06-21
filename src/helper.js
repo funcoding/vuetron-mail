@@ -67,7 +67,7 @@ module.exports = {
      *
      * @param mailFolder
      */
-    syncImap: function(vueInstance, accountDetails, mailAccountId, mailFolder, sequenceNumber, syncFrom){
+    syncImap: function(vueInstance, accountDetails, mailFolder, sequenceNumber, syncFrom){
         var mailBox = require('./Mailbox/model/mailBox'); //Putting in top will cause issue
         console.log(syncFrom, sequenceNumber);
         const options = {
@@ -148,7 +148,7 @@ module.exports = {
                                     headers: JSON.stringify(res.parts[0].body),
                                     body: res.parts[1].body,
                                     folder: mailFolder,
-                                    mail_account_id: mailAccountId
+                                    mail_account_id: accountDetails.id
                                 });
                             });
                         });
@@ -160,6 +160,9 @@ module.exports = {
                     vueInstance.disabled = false;
                     vueInstance.sync = 'sync';
                     vueInstance.message = 'Sync complete.';
+                    setTimeout(function () {
+                        vueInstance.message = '';
+                    }, 5000);
                 }).catch(function (error) {
                     console.log(error.message);
                     vueInstance.disabled = false;
@@ -192,7 +195,7 @@ module.exports = {
                                     headers: JSON.stringify(res.parts[0].body),
                                     body: res.parts[1].body,
                                     folder: mailFolder,
-                                    mail_account_id: mailAccountId
+                                    mail_account_id: accountDetails.id
                                 });
                             });
                         });
@@ -203,6 +206,9 @@ module.exports = {
                     vueInstance.disabled = false;
                     vueInstance.sync = 'sync';
                     vueInstance.message = 'Sync complete.';
+                    setTimeout(function () {
+                        vueInstance.message = '';
+                    }, 5000);
                 }).catch(function (error) {
                     console.log(error.message);
                     vueInstance.disabled = false;
@@ -236,7 +242,7 @@ module.exports = {
                                 headers: JSON.stringify(res.parts[0].body),
                                 body: res.parts[1].body,
                                 folder: mailFolder,
-                                mail_account_id: mailAccountId
+                                mail_account_id: accountDetails.id
                             });
                         });
                     });
@@ -248,6 +254,9 @@ module.exports = {
                 vueInstance.disabled = false;
                 vueInstance.sync = 'sync';
                 vueInstance.message = 'Sync complete.';
+                setTimeout(function () {
+                    vueInstance.message = '';
+                }, 5000);
             }).catch(function (error) {
                 console.log(error.message);
                 vueInstance.message = error.message;
