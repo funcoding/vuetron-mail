@@ -8,7 +8,7 @@ let route_paths =  [
     {
         path: '/',
         component: {
-            template: '<h4>Vuetron Mail Client</h4>'
+            template: '<h1 style = "text-align: center">Vuetron Mail Client</h1>'
         }
     }
 ];
