@@ -105,9 +105,9 @@ module.exports = {
                     .first().then(function (result) {
                         if (typeof result === 'undefined') {
                             //Assume new mail account has been created
-                            helper.syncImap(vueInstance, rows, id, mailFolder, null, rows.sync_from);
+                            helper.syncImap(vueInstance, rows, mailFolder, null, rows.sync_from);
                         } else {
-                            helper.syncImap(vueInstance, rows, id, mailFolder, null, dateFormat(result.created_at, "mmmm d, yyyy"));
+                            helper.syncImap(vueInstance, rows, mailFolder, null, dateFormat(result.created_at, "mmmm d, yyyy"));
                         }
                     }
                 ).catch(function(error) {
