@@ -35,11 +35,7 @@ module.exports = {
              * @returns {Array}
              */
             syncDuration: function () {
-                var time = [];
-                for(var i = 1; i <= 99; i++){
-                    time.push(i);
-                }
-                return time;
+                return [1, 5, 10, 15, 30, 45, 60];
             },
 
             /**
@@ -158,6 +154,10 @@ module.exports = {
         },
 
         methods: {
+            syncDuration: function () {
+                return [1, 5, 10, 15, 30, 45, 60];
+            },
+
             submitForm: function () {
                 let vue = this;
                 vue.message = 'Processing...';
