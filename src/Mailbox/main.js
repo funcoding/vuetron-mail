@@ -7,6 +7,7 @@ const helper = require('../helper');
 const components = require('./components');
 
 require('../global-components/info');
+let mailBox = require('./model/mailBox');
 
 Vue.use(VueRouter);
 
@@ -32,3 +33,6 @@ if(helper.getVueInstance() === null){
     app.$router.addRoutes(route_paths);
     helper.updateVueInstance(app);
 }
+
+//Enable auto sync
+mailBox.autoSync();

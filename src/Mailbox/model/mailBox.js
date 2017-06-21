@@ -46,6 +46,7 @@ module.exports = {
             knex.table(table)
                 .update('body', data[i].body)
                 .where('sequence_number', data[i].sequence_number)
+                .where('mail_account_id', data[i].mail_account_id)
                 .then(function(updated){
                     if(updated === 0){
                         knex.insert({
@@ -79,6 +80,7 @@ module.exports = {
             .first()
             .then(function (result) {
                 simpleParser(result.body, (err, mail)=>{
+                    console.log(mail);
                     if(mail.html !== false){
                         vueInstance.body = mail.html;
                     }else if(mail.textAsHtml !== false){
@@ -89,7 +91,7 @@ module.exports = {
 
                     if(mail.attachments.length > 0)
                     {
-                        for(var i=0;i<mail.attachments.length;i++){
+                        for(let i=0;i<mail.attachments.length;i++){
                             vueInstance.attachments.push(mail.attachments[i]);
                         }
                     }
@@ -136,5 +138,36 @@ module.exports = {
             .catch(function (error) {
                 console.error(error.message);
             });
+    },
+
+    autoSync: function () {
+        let folders = ['INBOX']; //['INBOX', 'Sent', 'Spam']
+        let vueInstance = helper.getVueInstance();
+        knex.table('mail_account').then(function (accounts) {
+            for(let i=0;i<accounts.length;i++){
+                setInterval(() => {
+                    for(let j in folders){
+                        knex.select('sequence_number', 'created_at')
+                            .table(table)
+                            .where('mail_account_id', accounts[i].id)
+                            .where('folder', folders[j])
+                            .orderBy('sequence_number', 'desc')
+                            .first().then(function (result) {
+                                if (typeof result === 'undefined') {
+                                    //Assume new mail account has been created
+                                    vueInstance.$children[2].$data.message = 'Auto syncing...';
+                                    helper.syncImap(vueInstance.$children[2], accounts[i], folders[j], null, accounts[i].sync_from);
+                                } else {
+                                    vueInstance.$children[2].$data.message = 'Auto syncing...';
+                                    helper.syncImap(vueInstance.$children[2], accounts[i], folders[j], null, dateFormat(result.created_at, "mmmm d, yyyy"));
+                                }
+                            }
+                        );
+                    }
+                }, parseInt(accounts[i].sync_duration) * 60000);
+            }
+        }).catch(function (err) {
+            vueInstance.$children[2].$data.message = err.message;
+        });
     }
 };
