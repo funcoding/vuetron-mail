@@ -85,10 +85,11 @@
     <div class="form-group">
         <label>Sync Duration (In minutes)</label>
         <select class="form-control" v-model="sync_duration">
+            <option v-bind:selected="sync_duration === minute" v-for="minute in syncDuration()">{{ minute }}</option>
         </select>
     </div>
 
-    <info v-show="display" v-bind:message="message"></info>
+    <info v-show="message.length > 0" v-bind:message="message"></info>
 
     <div class="form-actions">
         <button  type = "submit"  id = "update-mail-account-btn" class="btn btn-form btn-primary">
