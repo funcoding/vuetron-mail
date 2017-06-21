@@ -13,7 +13,7 @@ Feel free to give pull requests and I shall personally review them before mergin
 
 ## Features
 1. Add, edit, delete mail account.
-2. Only manual synchronization is available.
+2. Manual and automatic synchronization of mail folders.
 3. View, compose, reply, forward messages.
 4. Folders available: Inbox, Sent, Spam
 5. Drafts and Outbox will be introduced soon.
