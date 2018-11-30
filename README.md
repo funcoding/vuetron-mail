@@ -1,4 +1,7 @@
 ## Vuetron Mail
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/funcoding/vuetron-mail.svg)](https://greenkeeper.io/)
+
 This is not a full fledge mail client. This project was developed primarily using Electron and Vue.js . 
 The project was built in curiousity to try out Vue.js and electron.
 
